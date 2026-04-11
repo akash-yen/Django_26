@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cosmic Path | Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(circle at top right, rgba(88, 28, 135, 0.3), transparent),
+                radial-gradient(circle at bottom left, rgba(30, 58, 138, 0.3), transparent);
+            font-family: 'Quicksand', sans-serif;
+            color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .serif-font { font-family: 'Cinzel', serif; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-item:hover .icon-circle {
+            transform: scale(1.1) rotate(10deg);
+            background: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="stars"></div>
+
+    <div class="max-w-2xl w-full">
+        <header class="text-center mb-12">
+            <h1 class="serif-font text-4xl md:text-5xl mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-purple-400">
+                Choose Your Path
+            </h1>
+            <p class="text-lg opacity-70 italic">"The stars only guide those who are brave enough to walk."</p>
+        </header>
+
+        <nav class="space-y-6">
+            <a href="../home" class="nav-item block group">
+                <div class="glass-nav p-6 flex items-center hover:bg-white/10">
+                    <div class="icon-circle w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mr-6 transition-all duration-300">
+                        <span class="text-2xl">🔮</span>
+                    </div>
+                    <div>
+                        <h2 class="serif-font text-xl text-purple-300 group-hover:text-white transition-colors">New Revelation</h2>
+                        <p class="text-sm opacity-60">Consult the zodiac for a different perspective.</p>
+                    </div>
+                    <span class="ml-auto text-purple-500 group-hover:translate-x-2 transition-transform">→</span>
+                </div>
+            </a>
+
+            <a href="#" class="nav-item block group">
+                <div class="glass-nav p-6 flex items-center hover:bg-white/10">
+                    <div class="icon-circle w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mr-6 transition-all duration-300">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div>
+                        <h2 class="serif-font text-xl text-blue-300 group-hover:text-white transition-colors">Star Alignment</h2>
+                        <p class="text-sm opacity-60">Explore your connection with other souls.</p>
+                    </div>
+                    <span class="ml-auto text-blue-500 group-hover:translate-x-2 transition-transform">→</span>
+                </div>
+            </a>
+
+            <a href="../home" class="nav-item block group">
+                <div class="glass-nav p-6 flex items-center hover:bg-white/10">
+                    <div class="icon-circle w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mr-6 transition-all duration-300">
+                        <span class="text-2xl">🌌</span>
+                    </div>
+                    <div>
+                        <h2 class="serif-font text-xl text-pink-300 group-hover:text-white transition-colors">Return to Earth</h2>
+                        <p class="text-sm opacity-60">Carry the wisdom of the stars into your day.</p>
+                    </div>
+                    <span class="ml-auto text-pink-500 group-hover:translate-x-2 transition-transform">→</span>
+                </div>
+            </a>
+        </nav>
+
+        <footer class="mt-16 text-center">
+            <div class="inline-block p-[1px] rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent w-full mb-6"></div>
+            <p class="text-sm italic opacity-50">"You are not just in the universe, the universe is in you."</p>
+        </footer>
+    </div>
+</body>
+</html>

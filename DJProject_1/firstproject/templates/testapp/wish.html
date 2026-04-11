@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Travels Akshaya!</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a0a02;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Arizona Sunset Gradient */
+        .wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c003e, #fe5f75, #fc9842, #fdbb2d);
+            background-size: 400% 400%;
+            animation: sunsetShift 12s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        @keyframes sunsetShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Floating Particles (Heat Motes) */
+        .particles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            bottom: -10px;
+            animation: rise 10s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+
+        /* Headline & Typography */
+        .headline {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.4);
+            animation: float 4s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .name {
+            font-size: 8rem;
+            display: block;
+            background: linear-gradient(to bottom, #fff 20%, #fdbb2d 50%, #8b4513 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            letter-spacing: -2px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+            50% { transform: translateY(-15px) rotate(0.5deg); }
+        }
+
+        .message {
+            color: white;
+            font-size: 1.8rem;
+            max-width: 800px;
+            line-height: 1.5;
+            margin-top: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: rgba(0,0,0,0.25);
+            padding: 25px 40px;
+            border-radius: 50px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* Shiny Text Effect for Message */
+        .message span {
+            color: #fdbb2d;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(253, 187, 45, 0.5);
+        }
+
+        .location-tag {
+            margin-top: 50px;
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 8px;
+            padding: 10px 20px;
+            border-bottom: 2px solid #fdbb2d;
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.7; transform: scale(1); }
+        }
+
+        /* Saguaro Cacti Silhouettes */
+        .cactus-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 5%;
+            box-sizing: border-box;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .cactus {
+            fill: #1a0a02;
+            transform-origin: bottom center;
+            animation: sway 6s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .sun {
+            position: absolute;
+            bottom: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,247,0,0.4) 0%, rgba(255,140,0,0.2) 60%, transparent 80%);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="particles" id="particle-container"></div>
+        
+        <div class="sun"></div>
+        
+        <h1 class="headline">
+            WE MISS YOU <br>
+            <span class="name">AKSHAYA</span>
+        </h1>
+
+        <p class="message">
+            All the best on your <span>new job</span> and your <span>new life</span>. <br>
+            Arizona is getting a whole lot brighter!
+        </p>
+
+        <div class="location-tag">
+            CHARLOTTE &#10142; ARIZONA
+        </div>
+
+        <div class="cactus-container">
+            <svg class="cactus" height="120" width="60" viewBox="0 0 60 120">
+                <path d="M25,120 L35,120 L35,40 Q35,20 25,20 Q15,20 15,40 L15,120 Z" />
+                <path d="M35,80 Q50,80 50,60 L50,40 Q50,30 40,30 L40,40 Q40,70 35,70 Z" />
+                <path d="M15,90 Q0,90 0,70 L0,50 Q0,40 10,40 L10,50 Q10,80 15,80 Z" />
+            </svg>
+            <svg class="cactus" style="animation-delay: -2s;" height="180" width="80" viewBox="0 0 80 180">
+                <path d="M35,180 L45,180 L45,40 Q45,10 30,10 Q15,10 15,40 L15,180 Z" />
+                <path d="M45,110 Q70,110 70,80 L70,50 Q70,35 55,35 L55,50 Q55,95 45,95 Z" />
+            </svg>
+            <svg class="cactus" style="animation-delay: -4s;" height="100" width="50" viewBox="0 0 50 100">
+                <path d="M20,100 L30,100 L30,30 Q30,10 20,10 Q10,10 10,30 L10,100 Z" />
+                <path d="M10,70 Q-5,70 -5,50 L-5,35 Q-5,25 5,25 L5,35 Q5,60 10,60 Z" />
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        // Create random floating particles
+        const container = document.getElementById('particle-container');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 5 + 2 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = Math.random() * 5 + 5 + 's';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            
+            container.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
