@@ -1,0 +1,240 @@
+{% extends 'VRestaurant/base.html' %}
+
+{% block title %}{{ meal_type|capfirst }} Menu &mdash; Varshemma Hotel{% endblock %}
+
+{% block nav_extra %}
+<a href="{% url 'home' %}" class="nav-back">&larr; Back to Home</a>
+{% endblock %}
+
+{% block extra_style %}
+.menu-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top, #3b2a0e44 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.menu-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #2a1f08, #3d2e0f);
+    border: 1px solid #c9a84c44;
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    animation: fadeDown 0.5s ease both;
+}
+
+.menu-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.menu-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeDown 0.6s ease 0.1s both;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 20px auto 80px;
+    padding: 0 24px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid #2e2820;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.5s ease both;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.15s; }
+.card:nth-child(3) { animation-delay: 0.2s; }
+.card:nth-child(4) { animation-delay: 0.25s; }
+.card:nth-child(5) { animation-delay: 0.3s; }
+.card:nth-child(6) { animation-delay: 0.35s; }
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: #c9a84c33;
+    box-shadow: 0 20px 60px #0008, 0 0 30px #c9a84c11;
+}
+
+.card:hover::before { opacity: 1; }
+
+.card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 24px;
+    flex: 1;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #2e2820;
+    padding-top: 16px;
+    margin-top: auto;
+}
+
+.card-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--gold);
+}
+
+.card-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #2a2318;
+    padding: 4px 12px;
+    border-radius: 100px;
+}
+
+.notice {
+    max-width: 560px;
+    margin: 60px auto 100px;
+    padding: 56px 32px;
+    text-align: center;
+    background: var(--card-bg);
+    border: 1px solid #2e2820;
+    border-radius: 20px;
+    animation: fadeUp 0.6s ease both;
+}
+
+.notice-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.notice h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--gold);
+    margin-bottom: 14px;
+}
+
+.notice p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 28px;
+}
+
+.notice-action {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid var(--gold);
+    border-radius: 100px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.notice-action:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+{% endblock %}
+
+{% block content %}
+{% if is_available %}
+    <section class="menu-header">
+        <div class="menu-badge">
+            <span class="menu-dot"></span>Now Serving
+        </div>
+        <h1>{{ meal_type|capfirst }} Menu</h1>
+    </section>
+
+    {% if menu_items %}
+    <div class="menu-grid">
+        {% for item in menu_items %}
+        <div class="card">
+            <h3 class="card-name">{{ item.name }}</h3>
+            <p class="card-desc">{{ item.description }}</p>
+            <div class="card-footer">
+                <span class="card-price">${{ item.price }}</span>
+                <span class="card-tag">{{ item.meal_type|capfirst }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="notice">
+        <div class="notice-icon">🍽</div>
+        <h2>Menu Coming Soon</h2>
+        <p>We're preparing something special for {{ meal_type }}. Check back shortly.</p>
+        <a href="{% url 'home' %}" class="notice-action">Back to Home</a>
+    </div>
+    {% endif %}
+
+{% else %}
+<div class="notice">
+    <div class="notice-icon">🕒</div>
+    <h2>{{ meal_type|capfirst }} Unavailable</h2>
+    <p>{{ message }}</p>
+    {% if current_meal %}
+    <a href="{% url 'menu' current_meal %}" class="notice-action">View {{ current_meal|capfirst }} Menu</a>
+    {% else %}
+    <a href="{% url 'home' %}" class="notice-action">Back to Home</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

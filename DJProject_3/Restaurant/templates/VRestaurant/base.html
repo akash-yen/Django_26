@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Varshemma Hotel{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --dark: #0f0d0a;
+            --card-bg: #1a1712;
+            --text: #f0ead6;
+            --muted: #9e9278;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAV */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            border-bottom: 1px solid #1e1c18;
+            position: sticky;
+            top: 0;
+            background: #0f0d0aee;
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-mark {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .nav-back {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-back:hover { color: var(--gold); }
+
+        main { flex: 1; }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid #1e1c18;
+            padding: 40px 24px 32px;
+            text-align: center;
+        }
+
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border: 1px solid #2e2820;
+            border-radius: 100px;
+            margin-bottom: 16px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .location:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .location-pin {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .location-text {
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            border: 1px solid #2e2820;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px #c9a84c22;
+        }
+
+        .social-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: #2e2820;
+            margin: 0 auto 28px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        {% block extra_style %}{% endblock %}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">
+            <span class="logo-mark">✦</span>Varshemma Hotel
+        </a>
+        {% block nav_extra %}{% endblock %}
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="socials">
+            <a href="https://www.instagram.com/" target="_blank" class="social-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/" target="_blank" class="social-link" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.yelp.com/" target="_blank" class="social-link" aria-label="Yelp">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995-1.433c-.96-.273-1.74.847-1.125 1.644l3.24 4.181a.87.87 0 001.035.25 7.954 7.954 0 001.902-2.404c.021-.04.039-.08.054-.12a7.835 7.835 0 00.293-1.448.867.867 0 00-.404-.67zm-6.226-1.447a.973.973 0 00.917-.98l.117-7.226A.98.98 0 0014.178 2a7.93 7.93 0 00-5.146.944.865.865 0 00-.31.946l3.526 7.55a1.033 1.033 0 00.686.607zm-1.58 3.438a.957.957 0 00-.922-1.137l-4.997-.04a.865.865 0 00-.85.58 7.88 7.88 0 00-.373 3.074l.01.077a7.93 7.93 0 00.598 2.2.87.87 0 001.015.452l4.845-1.512a.92.92 0 00.674-1.023zm-2.043-5.408a1.068 1.068 0 00.13-1.292L5.4 2.548A.866.866 0 004.42 2.09a7.927 7.927 0 00-3.13 3.37.867.867 0 00.165 1.087l4.705 4.145c.445.393 1.152.276 1.489-.206zm3.54 6.2l.05 4.71a.97.97 0 00.692.933 6.91 6.91 0 00.93.212 7.928 7.928 0 004.07-.728.868.868 0 00.472-.974 7.896 7.896 0 00-.693-1.837l-2.58-3.823c-.56-.83-1.876-.53-1.984.453z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/" target="_blank" class="social-link" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg>
+            </a>
+            <a href="https://x.com/" target="_blank" class="social-link" aria-label="X">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <a href="https://www.google.com/maps/place/The+Ellis/@35.2291575,-80.8388973,17z/data=!4m10!1m2!2m1!1sthe+ellis+apartments!3m6!1s0x8856a1573e6a5747:0xdf90d097e7f197f8!8m2!3d35.2292019!4d-80.8364508!15sChR0aGUgZWxsaXMgYXBhcnRtZW50c1oWIhR0aGUgZWxsaXMgYXBhcnRtZW50c5IBEWFwYXJ0bWVudF9jb21wbGV4mgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJwT1RtUjVNVXROVlZaSllVVXhXVTR3Y0ZOT2Exa3lZVVZhZFZkRlJSQULgAQD6AQUIvQEQQA!16s%2Fg%2F11h5s44v4k?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="location">
+            <span class="location-pin">📍</span>
+            <span class="location-text">VARSHEMMA Ellis Complex, 512 N College St, Charlotte, NC 28202</span>
+        </a>
+        <div class="copyright">
+            &copy; 2026 VARSHEMMA HOTEL &mdash; CRAFTED WITH LOVE
+        </div>
+    </footer>
+
+</body>
+</html>
