@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varshemma Hotel — Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --dark: #0f0d0a;
+            --card-bg: #1a1712;
+            --text: #f0ead6;
+            --muted: #9e9278;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 80px 20px 60px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top, #3b2a0e55 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            animation: fadeDown 0.6s ease both;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeDown 0.7s ease 0.1s both;
+        }
+
+        .hero-sub {
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            animation: fadeDown 0.7s ease 0.2s both;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            max-width: 300px;
+            margin: 36px auto 0;
+            animation: fadeDown 0.7s ease 0.3s both;
+        }
+
+        .divider-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.3; }
+        .divider-icon { color: var(--gold); font-size: 1.1rem; }
+
+        /* MEAL BADGE */
+        .meal-section {
+            text-align: center;
+            padding: 0 20px 20px;
+            animation: fadeDown 0.7s ease 0.4s both;
+        }
+
+        .meal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #2a1f08, #3d2e0f);
+            border: 1px solid #c9a84c44;
+            border-radius: 100px;
+            padding: 10px 28px;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        .meal-dot {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* GRID */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 48px auto 80px;
+            padding: 0 24px;
+        }
+
+        /* CARD */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #2e2820;
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.15s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.25s; }
+        .card:nth-child(5) { animation-delay: 0.3s; }
+        .card:nth-child(6) { animation-delay: 0.35s; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #c9a84c33;
+            box-shadow: 0 20px 60px #0008, 0 0 30px #c9a84c11;
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #2e2820;
+            padding-top: 16px;
+        }
+
+        .card-price {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--gold);
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: #2a2318;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* EMPTY / CLOSED */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .hours-grid {
+            display: inline-grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .hour-card {
+            background: var(--card-bg);
+            border: 1px solid #2e2820;
+            border-radius: 12px;
+            padding: 16px 24px;
+            text-align: center;
+        }
+
+        .hour-card-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .hour-card-time {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 32px;
+            border-top: 1px solid #1e1c18;
+            color: var(--muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(0.8); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">Authentic Indian Cuisine</div>
+        <h1>Varshemma Hotel</h1>
+        <p class="hero-sub">Every dish tells a story. Every meal, a memory.</p>
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+        </div>
+    </section>
+
+    {% if meal_type %}
+
+        <!-- MEAL BADGE -->
+        <div class="meal-section">
+            <div class="meal-badge">
+                <span class="meal-dot"></span>
+                Now Serving &mdash; {{ meal_type|capfirst }}
+            </div>
+        </div>
+
+        {% if menu_items %}
+        <div class="menu-grid">
+            {% for item in menu_items %}
+            <div class="card">
+                <h3 class="card-name">{{ item.name }}</h3>
+                <p class="card-desc">{{ item.description }}</p>
+                <div class="card-footer">
+                    <span class="card-price">&#8377;{{ item.price }}</span>
+                    <span class="card-tag">{{ item.meal_type|capfirst }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🍽</div>
+            <h2>Menu Coming Soon</h2>
+            <p>We're preparing something special for {{ meal_type }}. Check back shortly.</p>
+        </div>
+        {% endif %}
+
+    {% else %}
+
+        <!-- CLOSED STATE -->
+        <div class="empty-state">
+            <div class="empty-icon">🌙</div>
+            <h2>We're Closed Right Now</h2>
+            <p>Come back during our serving hours and we'll take care of you.</p>
+            <div class="hours-grid">
+                <div class="hour-card">
+                    <div class="hour-card-label">Breakfast</div>
+                    <div class="hour-card-time">6:00 – 11:59 AM</div>
+                </div>
+                <div class="hour-card">
+                    <div class="hour-card-label">Lunch</div>
+                    <div class="hour-card-time">12:00 – 4:59 PM</div>
+                </div>
+                <div class="hour-card">
+                    <div class="hour-card-label">Dinner</div>
+                    <div class="hour-card-time">5:00 – 10:59 PM</div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+    <footer>
+        &copy; 2026 Varshemma Hotel &mdash; Crafted with love
+    </footer>
+
+</body>
+</html>
