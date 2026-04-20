@@ -144,6 +144,12 @@
     border-radius: 100px;
 }
 
+.card-tag.all-day {
+    color: var(--gold);
+    background: #c9a84c22;
+    border: 1px solid #c9a84c55;
+}
+
 .notice {
     max-width: 560px;
     margin: 60px auto 100px;
@@ -211,7 +217,11 @@
             <p class="card-desc">{{ item.description }}</p>
             <div class="card-footer">
                 <span class="card-price">${{ item.price }}</span>
-                <span class="card-tag">{{ item.meal_type|capfirst }}</span>
+                {% if item.always_available %}
+                    <span class="card-tag all-day">All Day</span>
+                {% else %}
+                    <span class="card-tag">{{ item.meal_type|capfirst }}</span>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

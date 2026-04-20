@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
+from django.db.models import Q
 from datetime import datetime
 from .models import MenuItem
 
@@ -37,7 +38,9 @@ def menu(request, meal_type):
     current_meal = get_meal_type()
 
     if meal_type == current_meal:
-        menu_items = MenuItem.objects.filter(meal_type=meal_type)
+        menu_items = MenuItem.objects.filter(
+            Q(meal_type=meal_type) | Q(always_available=True)
+        ).order_by('always_available', 'name')
         return render(request, 'VRestaurant/menu.html', {
             'menu_items': menu_items,
             'meal_type': meal_type,
